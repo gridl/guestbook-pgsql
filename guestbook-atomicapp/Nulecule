@@ -1,0 +1,22 @@
+---
+specversion: 0.0.2
+id: guestbook-app
+
+metadata:
+  name: Guestbook Application
+  appversion: 0.0.1
+  description: Atomic app for deploying the guestbook Python app
+graph:
+  - name: guestbookfront-app
+    params:
+      - name: image
+        description: The frontend part
+        default: guestbook
+    artifacts:
+      kubernetes:
+        - file://artifacts/kubernetes/guestbook-controller.json
+        - file://artifacts/kubernetes/guestbook-service.json
+      docker:
+        - file://artifacts/docker/guestbook-app-pod_run
+  - name: postgresql-centos7
+    source: docker://projectatomic/postgresql-centos7-atomicapp

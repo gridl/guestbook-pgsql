@@ -1,0 +1,1 @@
+docker run -d --name postgresql-atomicapp-app -e POSTGRESQL_USER=$db_user -e POSTGRESQL_PASSWORD=$db_pass -e POSTGRESQL_DATABASE=$db_name docker.io/centos/postgresql-94-centos7
