@@ -1,0 +1,28 @@
+body {
+background: #eeeeee;
+font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+padding: 1em;
+}
+
+h1, h2, h3 {
+color: #061539;
+}
+
+label, p.signature {
+border-left: 1em solid #162955;
+padding-left: 2em;
+}
+
+label,input,textarea {
+display: block;
+margin: 1em 0;
+}
+
+input,textarea {
+width: 70%;
+}
+
+label, input.submit {
+margin-top: 2em;
+width: auto;
+}

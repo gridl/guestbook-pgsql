@@ -1,9 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="{{ url_for('static',filename='styles.css') }}" type="text/css" media="screen" />
+<title>Guest Book</title>
+</head>
+<body>
+
 <h1>Guest Book</h1>
 
 {% for signature in signatures %}
 
 <h2>{{ signature['name'] }}</h2>
-<p>{{ signature['message'] }}</p>
+<p class="signature">{{ signature['message'] }}</p>
 <hr>
 
 {% endfor %}
+
+</body>
+</html>

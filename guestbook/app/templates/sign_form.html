@@ -1,11 +1,22 @@
-<h1>Sign Me</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="{{ url_for('static',filename='styles.css') }}" type="text/css" media="screen" />
+<title>Guest Book</title>
+</head>
+<body>
+
+<h1>Guest Book</h1>
 
 <form action='/submit' method='post'>
   <label for='name'>Name</label>
   <input name='name' type='text'></input>
 
   <label for='message'>Message</label>
-  <input name='message' type='text'></input>
+  <textarea name='message'></textarea>
 
-  <input type='submit'></input>
+  <input type='submit' class="submit" value="Submit message"></input>
 </form>
+</body>
+</html>
