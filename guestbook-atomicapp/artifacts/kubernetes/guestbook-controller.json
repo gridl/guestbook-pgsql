@@ -23,6 +23,11 @@
                {
                   "name":"guestbook",
                   "image":"$image",
+                  "env": [
+                    {"name": "POSTGRES_DATABASE", "value": "$db_name"},
+                    {"name": "POSTGRES_USER", "value": "$db_user"},
+                    {"name": "POSTGRES_PASSWORD", "value": "$db_pass"}
+                  ],
                   "ports":[
                      {
                         "name":"http-server",

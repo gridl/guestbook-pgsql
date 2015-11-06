@@ -8,11 +8,11 @@ spec:
       name: postgresql
       image: docker.io/centos/postgresql-94-centos7
       env:
-        - name: MYSQL_DATABASE
+        - name: POSTGRESQL_DATABASE
           value: $db_name
-        - name: MYSQL_USER
+        - name: POSTGRESQL_USER
           value: $db_user
-        - name: MYSQL_PASSWORD
+        - name: POSTGRESQL_PASSWORD
           value: $db_pass
       ports:
         - containerPort: 5432

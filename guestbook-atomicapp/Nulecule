@@ -12,6 +12,12 @@ graph:
       - name: image
         description: The frontend part
         default: guestbook
+      - name: db_user
+        description: Database User
+      - name: db_pass
+        description: Database Password
+      - name: db_name
+        description: Database Name
     artifacts:
       kubernetes:
         - file://artifacts/kubernetes/guestbook-controller.json
