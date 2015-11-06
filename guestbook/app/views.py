@@ -8,6 +8,7 @@ import dataset
 import os
 import time
 
+print(os.environ)
 # Connnect to database
 #db = dataset.connect('sqlite:///file.db')
 db = None
@@ -15,8 +16,8 @@ tries = 0
 while not db and tries < 10:
     try:
         db = dataset.connect('postgresql://{username}:{password}@{host}:{port}/{dbname}'.format(
-                              host=os.environ.get('POSTGRES_PORT_5432_TCP_ADDR'),
-                              port=os.environ.get('POSTGRES_PORT_5432_TCP_PORT'),
+                              host=os.environ.get('POSTGRESQL_PORT_5432_TCP_ADDR'),
+                              port=os.environ.get('POSTGRESQL_PORT_5432_TCP_PORT'),
                               username=os.environ.get('POSTGRESQL_USER'),
                               password=os.environ.get('POSTGRESQL_PASSWORD'),
                               dbname=os.environ.get('POSTGRESQL_DATABASE')))
@@ -25,8 +26,8 @@ while not db and tries < 10:
 
 if not db:
     print('Error: could not connect to DB: {host}:{port}'.format(
-          host=os.environ.get('POSTGRES_PORT_5432_TCP_ADDR'),
-          port=os.environ.get('POSTGRES_PORT_5432_TCP_PORT')))
+          host=os.environ.get('POSTGRESQL_PORT_5432_TCP_ADDR'),
+          port=os.environ.get('POSTGRESQL_PORT_5432_TCP_PORT')))
     exit(1)
 
 # create your guests table
