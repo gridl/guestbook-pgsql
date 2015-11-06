@@ -10,24 +10,39 @@ import time
 
 print(os.environ)
 # Connnect to database
-#db = dataset.connect('sqlite:///file.db')
 db = None
 tries = 0
+
+# variant for docker --link ...
+if 'DB_PORT_5432_TCP_ADDR' in os.environ:
+    host=os.environ.get('DB_PORT_5432_TCP_ADDR'),
+    port=os.environ.get('DB_PORT_5432_TCP_PORT'),
+    username=os.environ.get('DB_ENV_POSTGRESQL_USER'),
+    password=os.environ.get('DB_ENV_POSTGRESQL_PASSWORD'),
+    dbname=os.environ.get('DB_ENV_POSTGRESQL_DATABASE')))
+
+# variant for kubernetes
+elif 'POSTGRESQL_PORT_5432_TCP_ADDR' in os.environ:
+    host=os.environ.get('POSTGRESQL_PORT_5432_TCP_ADDR'),
+    port=os.environ.get('POSTGRESQL_PORT_5432_TCP_PORT'),
+    username=os.environ.get('POSTGRESQL_USER'),
+    password=os.environ.get('POSTGRESQL_PASSWORD'),
+    dbname=os.environ.get('POSTGRESQL_DATABASE')))
+
+else:
+    print('Error: environment variables not set for database connection')
+    exit(1)
+
 while not db and tries < 10:
     try:
         db = dataset.connect('postgresql://{username}:{password}@{host}:{port}/{dbname}'.format(
-                              host=os.environ.get('POSTGRESQL_PORT_5432_TCP_ADDR'),
-                              port=os.environ.get('POSTGRESQL_PORT_5432_TCP_PORT'),
-                              username=os.environ.get('POSTGRESQL_USER'),
-                              password=os.environ.get('POSTGRESQL_PASSWORD'),
-                              dbname=os.environ.get('POSTGRESQL_DATABASE')))
+                              host=host, port=port, username=username, password=password, dbname=dbname))
     except sqlalchemy.exc.OperationalError:
         time.sleep(2)
 
 if not db:
     print('Error: could not connect to DB: {host}:{port}'.format(
-          host=os.environ.get('POSTGRESQL_PORT_5432_TCP_ADDR'),
-          port=os.environ.get('POSTGRESQL_PORT_5432_TCP_PORT')))
+          host=host, port=port))
     exit(1)
 
 # create your guests table
